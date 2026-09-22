@@ -1,0 +1,89 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Narakeet - Text to audio</title>
+<style>
+ body{font:14px system-ui;margin:24px;max-width:640px}
+ #unparsedScriptEditor{border:1px solid #ccc;min-height:140px;padding:8px;white-space:pre-wrap}
+ .hidden{display:none}
+ button{margin:4px 0;padding:10px 14px;display:block;width:100%}
+ .dupe{position:absolute;width:0;height:0;overflow:hidden;padding:0;margin:0;border:0}
+</style></head>
+<body>
+<!-- Reproduces the parts of the real Narakeet DOM the CLI touches:
+     the contenteditable="" editor (empty string, not "true"), the hidden
+     backing textarea that DOM writes never reach, three create-audio buttons
+     with only one visible, and the hidden Speed control block. -->
+<h3>Text to audio</h3>
+
+<label>LANGUAGE:
+<select name="language">
+  <option value="en-GB">English - British</option>
+  <option value="en-US">English - American</option>
+  <option value="en-IN">English - Indian Accent</option>
+</select></label>
+
+<label>VOICE:
+<select name="voice"><option value="beatrice">Beatrice (Female)</option></select>
+</label>
+
+<div class="control-block hidden">
+  <label>Speed:</label>
+  <select name="voice-speed" id="cfgVideoVoiceSpeed">
+    <option value="slow">slow</option><option value="normal" selected>normal</option>
+    <option value="fast">fast</option><option value="">custom</option>
+  </select>
+</div>
+
+<label>SCRIPT:</label>
+<div id="unparsedScriptEditor" role="unparsedScriptEditor" contenteditable=""></div>
+<textarea name="content" style="display:none"></textarea>
+
+<button role="create-audio" class="dupe">Create audio</button>
+<button role="create-audio" id="realCreate">CREATE AUDIO</button>
+<button role="create-audio" class="dupe">Create audio</button>
+
+<div id="status"></div>
+<div id="result" class="hidden">
+  <h3>Your audio is ready</h3>
+  <div>AUDIO DURATION: 00:41</div>
+  <a href="#" class="dupe">Download</a>
+  <button id="realDownload">DOWNLOAD</button>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+
+// Voices reload when the language changes — the CLI waits for this.
+$('select[name=language]').addEventListener('change', e => {
+  const v = $('select[name=voice]');
+  setTimeout(() => {
+    v.innerHTML = e.target.value === 'en-IN'
+      ? '<option value="neerja">Neerja (Female)</option>' +
+        '<option value="victor/en-in">Victor (Male)</option>'
+      : '<option value="beatrice">Beatrice (Female)</option>';
+  }, 300);
+});
+
+// The real page never syncs DOM writes into the backing textarea. Only real
+// input events do — which is exactly what the CLI has to prove it is doing.
+$('#unparsedScriptEditor').addEventListener('beforeinput', () => {
+  setTimeout(() => { $('textarea[name=content]').value = $('#unparsedScriptEditor').innerText; }, 0);
+});
+
+$('#realCreate').addEventListener('click', () => {
+  const txt = $('#unparsedScriptEditor').innerText.trim();
+  if (!txt) { $('#status').textContent = 'error: empty script'; return; }
+  $('#status').textContent = 'Building your audio';
+  setTimeout(() => {
+    $('#status').textContent = '';
+    $('#result').classList.remove('hidden');
+  }, 6000);
+});
+
+$('#realDownload').addEventListener('click', () => {
+  // A real click here downloads a file. The test harness drops one into the
+  // watch folder instead.
+  fetch('/__download', {method: 'POST'}).catch(() => {});
+  $('#status').textContent = 'downloaded';
+});
+</script>
+</body></html>

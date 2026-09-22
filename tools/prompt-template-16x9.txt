@@ -1,0 +1,210 @@
+Build a 16:9 LANDSCAPE animated explainer for Presolv360 (legal-tech / online dispute resolution, India).
+
+CANVAS
+1920 x 1080, 30 fps. TOTAL DURATION EXACTLY {{DURATION}} SECONDS.
+Do not round it, extend it or shorten it.
+
+THE SCENE LIST AND CUE TIMES BELOW ARE FIXED AND NON-NEGOTIABLE.
+They were measured from a finished narration track using silence detection, so
+every number is the real moment a sentence begins. Do not rewrite the copy, do
+not merge, split, reorder or add scenes, and do not adjust any timing. Build
+exactly these {{SCENE_COUNT}} scenes at exactly these times. If a scene feels
+short, change the animation inside it, never its duration.
+
+{{SCENES}}
+
+ONE SINGLE-PAGE ANIMATION — NOT A MULTI-PAGE PROJECT
+  Build this as ONE continuous animation on ONE page, timeline 0 to
+  {{DURATION}}s, exactly like a single scrolling video. Do NOT create a second
+  page for the closing scene or for any other scene, even though the closing
+  layout differs from the rest. A different layout is not a reason for a
+  different page — it is still one scene at its stated time inside the same
+  single-page timeline. A multi-page project cannot be exported as one video.
+
+THIS IS A RE-BLOCKING FOR A WIDE FRAME, NOT A CROP AND NOT A SCALE-UP
+  Do NOT letterbox or pillarbox. Do NOT place a tall 9:16 composition inside
+  this canvas with empty bars at the sides. Every element is repositioned for
+  the wide frame and the full 1920 x 1080 area is a designed composition.
+
+  Do NOT simply scale a vertical layout up. Text must not become oversized and
+  nothing should feel cramped or zoomed in. The wide frame has MORE room - use
+  it for breathing space, not for magnification.
+
+  The core change: content that would be STACKED is now SIDE-BY-SIDE.
+
+ATTACHED REFERENCE IMAGES — COPY THEM, DO NOT REDRAW
+  Two images are attached to this message. They are the authority on the
+  artwork; the prose below only describes what you are looking at.
+
+  1. The MASCOT SHEET — five approved poses of the Presolv360 mascot.
+     Reproduce the character exactly as drawn: ONE rounded body split
+     vertically down the middle, NOT two separate figures and NOT a flat logo
+     mark. Orange left half carrying three dark dots. Navy right half carrying
+     two dot eyes with white highlights and a curved smile. A thin curved
+     antenna with an orange ball tip rising from the top of the seam. A small
+     orange circle joint at the centre of the seam. Two thin navy arms, two
+     short peg legs with oval feet. A small speech-bubble tail under each half.
+     Outlines are dark navy, not pure black.
+
+     The five poses, and the beat each one is for:
+       neutral smile, arms down            - stating a fact
+       concerned, hand raised to chin      - a problem or a risk
+       pointing to its right               - directing attention to a number
+       one arm extended, presenting        - introducing an option
+       celebrating, fist raised, beside a
+         navy shield with a white tick     - the resolution or payoff
+     EVERY SINGLE SCENE gets its own pose choice from this list, matched to
+     that scene's meaning - this is a per-scene decision, not a once-per-video
+     one. Using the same pose in two consecutive scenes is only acceptable if
+     both scenes carry the same kind of beat back to back; otherwise change
+     it. Do not invent new expressions beyond these five.
+
+  2. The STACKED LOGO — the mark plus the PRESOLV360 wordmark.
+     Use the wordmark only, top-left at x=120, y=70. Never place the mascot
+     where the logo goes, and never use the logo mark in place of the mascot.
+
+LANDSCAPE LAYOUT GRID (1920 x 1080)
+  12 columns. Side margins 120px. Top and bottom margins 80px.
+
+  Persistent header
+    y=70    PRESOLV360 wordmark, top-left at x=120
+            "ODR · INDIA" top-right, right-aligned to x=1800, grey, uppercase
+
+  Left half (columns 1-5, x=120 to x=880)
+    y=150   micro-label, uppercase
+    y=210   headline block, LEFT-ALIGNED, maximum 3 lines
+    y=560   caption as PLAIN TEXT, left-aligned - no container of any kind
+
+  Right half (columns 7-12, x=1040 to x=1800)
+    y=200   illustration zone, up to 760 x 680. The scene metaphor lives here.
+
+  Mascot
+    Bottom-left, around x=200, feet on a baseline near y=960, about 280px tall.
+    It must not overlap the illustration zone or the caption text.
+
+  Keep the lower-right 400 x 120 region clear - player chrome sits there.
+
+  The progress motif spans the full width as a horizontal row at y=110,
+  between the header and the headline. Keep that choice consistent in every
+  scene; do not move it to a vertical rail partway through.
+
+  The CLOSING scene is the exception: centre it in the full frame - wordmark,
+  a thin rule, the closing line, then the fine print, stacked centrally, with
+  the mascot beside or beneath it. Do not push the end card into the left
+  column.
+
+PER-SCENE RE-BLOCKING
+  A list that would stack vertically becomes a horizontal ROW across the right
+  half - three items become three side-by-side columns, never three rows.
+  A vertical process spine becomes a HORIZONTAL spine running left to right,
+  with connectors drawing rightward.
+  A two-state comparison that would sit top and bottom becomes genuinely side
+  by side, left and right, separated by a thin vertical navy hairline.
+
+VISUAL SYSTEM
+  Flat near-white background #f4f7f8. NO gradients anywhere.
+  Navy #12294a for outlines and dark fills, mid-blue #1c6fb8, orange #f5a63c,
+  grey #6b7785 for captions and the header's right-hand label.
+
+  Type: Inter. Scaled DOWN from the vertical cut, because a wide frame is
+  viewed from further away and the text column is narrower in proportion:
+    Micro-label   22px, weight 600, letter-spacing 0.12em, uppercase, grey
+    Headline      60px, weight 700, line-height 1.16, letter-spacing -0.02em,
+                  navy, MAXIMUM 3 LINES
+    Caption       28px, weight 500, navy
+    Label on an illustrated element   34px, weight 600, navy
+    Sub-label on an illustrated element  22px, weight 450, grey
+    Fine print    18px, weight 450, grey
+
+  EVERY drawn element carries a bold navy outline about 5px wide - the mascot,
+  documents, icons, chart bars, coins, calendars, roads, shields. This is a
+  bold sticker/vector illustration style. Thin hairlines and outline-less flat
+  shapes are wrong.
+  Bold saturated fills. Pale, muted or washed-out fills are wrong.
+
+  NO rounded white cards, NO UI panels, NO app-screenshot containers, NO
+  boxes-with-a-label-inside. This is the single most important rule, and it
+  still applies to the horizontal rows described above: a row of three items is
+  a row of three ILLUSTRATED elements - three documents, three coins, three
+  milestones on a spine - never three cards. Build each scene as an
+  ILLUSTRATED METAPHOR instead:
+    a road running left to right threading document
+      cards                                      a journey or a process
+    a bar chart physically growing beside the
+      mascot                                     cost, delay or recovery
+    scattered documents, coins, calendar tiles   accumulating burden
+    a branching path with branches dimming
+      to grey                                    options narrowing
+    a bracket closing before a marker reaches it a deadline passing
+    a connecting line thinning, then dashed      a stalled negotiation
+    a document with a padlock                    confidentiality
+    a navy shield with a white tick              a binding outcome
+  Show the consequence structurally. Never assert it in words alone.
+
+  Progress motifs are drawn as illustration, never as a UI widget: a row of
+  outlined blocks filling orange one by one, stepping stones along a path with
+  the mascot standing on the current one, a marker advancing along a road.
+
+  NEVER use red, X marks, warning triangles or exclamation marks anywhere.
+
+MASCOT PLACEMENT AND MOVEMENT
+  The mascot is a participant in the scene, not a corner watermark. Draw it
+  standing on the scene's ground plane with a soft grey elliptical shadow under
+  its feet grounding it.
+
+  It TRAVELS OFTEN. Give it a new position for NEARLY EVERY SCENE, not just
+  3 or 4 times across the whole video - by default, assume it moves at every
+  scene boundary unless two consecutive scenes are so tightly linked that
+  staying put is clearly more natural. Restlessness is the goal: the mascot
+  should read as constantly repositioning itself to be near whatever the
+  video is talking about right now, not settling into a small handful of
+  fixed spots. The wide frame gives it more room than a vertical one, so let
+  it cross real distance horizontally - stepping toward the illustration it
+  points at, moving aside to make room for the next scene's metaphor. Each
+  move is a smooth ease-in-out glide, 1.2-2s long, covering real distance
+  across the frame - this is a walk, not a snap.
+  Start near-static for the first 15% of the glide, then ease in to a steady
+  pace, then ease out to a clean stop. Do not cut the glide short at 0.4-0.8s
+  - that reads as a jump, not a walk.
+
+  BETWEEN MOVES IT IS COMPLETELY STILL. No idle bob, no sway, no breathing,
+  no float, no wobble, no weight-shift, no jitter, no continuous motion of any
+  kind. When it arrives at a position it holds that position cleanly - this is
+  a hard requirement, not a preference - idle motion has been rejected.
+
+  ONE REACTION GESTURE PER SCENE IS ALLOWED, AND ONLY ONE. When a scene's
+  headline, a number, or a new element on screen actually appears mid-scene
+  (not at the scene's start), the mascot may do exactly one quick hop or
+  head-tilt - a displacement of 40-100px that returns to the exact same spot,
+  lasting 0.3-0.4s total - timed to land on that appearance. This is a single
+  discrete beat, not a loop: before it, the mascot is still; after it
+  completes and returns to its start position, the mascot is still again for
+  the rest of the scene. Never combine a reaction gesture with a scene-to-
+  scene glide in the same beat, and never repeat it more than once per scene.
+  If nothing new appears mid-scene, skip the gesture entirely and stay still -
+  it is not required every scene.
+
+MOTION
+  Elements enter with a short rise-and-fade, 500-700ms, cubic ease-out, about
+  250ms stagger between siblings. Because a wide frame reads left to right,
+  entrances may drift in horizontally by up to 60px rather than only rising.
+  Every animation settles at least 0.4s before its scene ends. Cross-fade
+  between scenes over about 250-300ms - no hard cuts, no slides, no spins. The
+  final frame is never a dead freeze. Props and chart bars may draw or grow on
+  entry. Keep it restrained: this is a professional legal brand, not a product
+  launch. Never photographic.
+
+LANGUAGE - NON-NEGOTIABLE
+  No absolute guarantees anywhere. Never claim anything is guaranteed or
+  ensured, never promise a specific saving, never present anything as legal
+  advice. Keep every hedge exactly as written above ("can", "may", "rarely") -
+  do not strengthen any claim.
+  Any claim touching enforceability or a legal outcome must carry its
+  qualifier ON SCREEN IN THE SAME FRAME as legible fine print - never deferred
+  to a later scene.
+  The closing scene carries: "Informational only. Not legal advice. Subject to
+  legal review."
+
+DELIVERABLE
+  One animation, 1920 x 1080, exactly {{DURATION}} seconds, SILENT.
+  No audio, no caption bar, no subtitles - narration is added afterwards.

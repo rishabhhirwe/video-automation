@@ -1,0 +1,113 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Claude Design</title>
+<style>body{font:14px system-ui;margin:24px}button{margin:4px;padding:6px 10px}
+#composer{border:1px solid #ccc;min-height:80px;padding:8px;white-space:pre-wrap}
+#menu,#dialog{display:none;border:1px solid #999;padding:8px;margin-top:8px}
+.hide{display:none}</style></head>
+<body>
+<!-- Mirrors the parts of the real Claude Design DOM the CLI touches:
+     data-testid hooks on the composer and Create button, text-only portal
+     buttons for design system / Share / export rows, role=radio size options. -->
+<h3>mock: home</h3>
+<div id="home">
+  <button id="dsBtn">Design system Litelo Design System</button>
+  <button id="modelBtn">Model Opus 5</button>
+  <div id="menu">
+    <button class="dsOpt">Litelo Design System</button>
+    <button class="dsOpt">Incase360 Design System</button>
+    <button class="dsOpt">Presolv360 Design System</button>
+  </div>
+  <div id="composer" role="textbox" contenteditable="true" aria-multiline="true"
+       data-testid="home-composer-input"></div>
+  <!-- Like the live composer: a bare multiple file input, no accept filter.
+       Uploaded files appear as <img alt="<filename>"> thumbnails. -->
+  <input type="file" id="attach" multiple>
+  <div id="thumbs"></div>
+  <button data-testid="home-composer-send" title="Create" aria-busy="false">Create</button>
+</div>
+
+<h3 class="hide" id="projHead">mock: project</h3>
+<div id="project" class="hide">
+  <button id="shareBtn">Share</button>
+  <!-- Set window.__mockMultiPage = true (see mock/README or a test's own
+       <script>) before loading to exercise the multi-page fallback path:
+       the Share panel then omits the direct video row and nests it under
+       "More formats and apps" instead, as the live multi-page project did. -->
+  <div id="shareMenu" class="hide">
+    <div>Export</div>
+    <button id="videoRow"><span>Video</span><div>MP4 of this animation</div><span>Download</span></button>
+    <button><span>Project HTML</span><div>.zip or standalone</div><span>Download</span></button>
+    <button id="moreFormats"><span>More formats and apps</span></button>
+  </div>
+  <div id="moreFormatsMenu" class="hide">
+    <button id="videoRowNested"><span>Video</span><div>MP4, for animation pages</div></button>
+  </div>
+  <div id="dialog">
+    <div>Export video</div>
+    <span role="radio" tabindex="0">338 × 600 Smaller file, faster export.</span><br>
+    <span role="radio" tabindex="0">720 × 1280 Smaller file, faster export.</span><br>
+    <span role="radio" tabindex="0">Original size — 1080 × 1920 The size the animation was designed at.</span><br>
+    <button>Cancel</button>
+    <button>Export</button>
+  </div>
+  <div id="growth"></div>
+</div>
+<script>
+// Render an <img alt="<filename>"> per attachment, as the live composer does.
+document.getElementById('attach').addEventListener('change', (e) => {
+  const box = document.getElementById('thumbs');
+  for (const f of e.target.files) {
+    const img = document.createElement('img');
+    img.alt = f.name;
+    img.width = 48;
+    img.src = URL.createObjectURL(f);
+    box.appendChild(img);
+  }
+});
+const $ = s => document.querySelector(s);
+// ?multipage=1 exercises the fallback path in design-video.mjs's exportVideo():
+// a multi-page project (the live 16:9 build's end-card-as-its-own-page bug)
+// omits the direct video row entirely, nesting it under "More formats".
+if (new URLSearchParams(location.search).get('multipage') === '1') {
+  $('#videoRow').remove();
+} else {
+  $('#moreFormats').classList.add('hide');
+}
+const openExportDialog = () => { $('#dialog').style.display = 'block'; };
+$('#moreFormats').onclick = () => { $('#moreFormatsMenu').classList.remove('hide'); };
+$('#videoRowNested').onclick = openExportDialog;
+$('#dsBtn').onclick = () => { $('#menu').style.display = 'block'; };
+document.querySelectorAll('.dsOpt').forEach(b => b.onclick = () => {
+  $('#dsBtn').textContent = 'Design system ' + b.textContent;
+  $('#menu').style.display = 'none';
+});
+
+// Create -> fake a build: url changes, page text grows for a while, then settles.
+$('[data-testid="home-composer-send"]').onclick = () => {
+  history.pushState({}, '', '/design/p/1c1aeded-bc28-4299-aa60-66f03c36a3a5');
+  $('#home').classList.add('hide');
+  $('#projHead').classList.remove('hide');
+  $('#project').classList.remove('hide');
+  let n = 0;
+  const t = setInterval(() => {
+    $('#growth').textContent += 'building step ' + (++n) + ' ... ';
+    if (n > 3) clearInterval(t);   // then text stops changing -> "settled"
+  }, 1500);
+};
+
+$('#shareBtn').onclick = () => { $('#shareMenu').classList.remove('hide'); };
+if ($('#videoRow')) $('#videoRow').onclick = openExportDialog;
+document.querySelectorAll('[role=radio]').forEach(r => r.onclick = () => {
+  document.querySelectorAll('[role=radio]').forEach(x => x.style.outline = '');
+  r.style.outline = '2px solid blue';
+  window.__pickedSize = r.textContent.trim().slice(0, 24);
+});
+document.querySelectorAll('#dialog button').forEach(b => b.onclick = () => {
+  if (b.textContent.trim() === 'Export') {
+    window.__exported = true;
+    $('#dialog').style.display = 'none';
+    fetch('/__export', {method:'POST'}).catch(()=>{});
+  } else { $('#dialog').style.display = 'none'; }
+});
+</script>
+</body></html>

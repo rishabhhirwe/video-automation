@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Generated pipeline output — out/ is the default OUT_DIR fallback and can
+# accumulate run artifacts (real per-video output lives one level up in
+# ~/Desktop/Video Automation/<Project Name>/, outside this repo)
+out/
+
+# Per-run inputs — overwritten by every video's script/labels, not meant to
+# be tracked as project history
+script.txt
+labels.json
+
+# Node
+node_modules/
